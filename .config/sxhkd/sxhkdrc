@@ -1,0 +1,161 @@
+super + Return
+	kitty
+
+# open terminal (sibe_dir)
+super + shift + Return
+	kitty --working-directory $SIBE_DIR 
+
+super + ctrl  + Return
+	kitty --working-directory $SIBE_DOCKER_DIR
+
+super + alt + Return
+	kitty --working-directory $EXECUTOR_TAREFA_DIR
+
+# inverter orientação horizontal / vertical
+super + shift + b
+	bspc node @parent -R 90	
+
+# capture screen
+Print
+	flameshot gui
+		
+# rofi run
+super + space
+	rofi -modi "drun,window,run" -show drun
+	
+# Rofi drun 
+super + shift + space
+	rofi -modi "drun" -show run
+
+# rofi window
+super + Tab
+	rofi -monitor -4 -show window
+
+# rofi paste menu 
+super + p 
+	clipmenu -i -fn Terminus:size=8 -nb '#002b36' -nf '#839496' -sb '#073642' -sf '#93a1a1'
+#	cliphist list | rofi -dmenu | cliphist decode | xclip -selection clipboard
+	
+	
+	# rofi -modi "clipboard:greenclip print" -monitor -4 -show clipboard -run-command '{cmd}'
+	
+# rofi Pass	
+super + shift + p
+	pm menu
+	
+# reload sxhkd
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# quit/restart bspwm
+super + shift + {q,r}
+	bspc {quit,wm -r}
+
+
+# close and kill
+super + {_,shift + }q
+	bspc node -{c,k}
+
+	
+
+# close and kill	
+# super + {_,shift + }w
+# 	bspc node -{c,k}	
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+# alternate between the tiled and monocle layout	
+super + f
+	bspc desktop -l next	
+
+# focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east} --follow
+
+# focus the monitor in the given direction
+super + ctrl + {h,l}		
+	bspc monitor {west, east} -f 
+
+# focus the node for the given path jump
+super + {p,b,comma,period}
+	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous window in the current desktop
+#super + {_,shift + }c
+#	bspc node -f {next,prev}.local.!hidden.window
+
+
+# focus the last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} {1-9,0}.local --follow
+
+# focus or send to the given desktop
+super + {_,shift + }{KP_End,KP_Down,KP_Next,KP_Left,KP_Begin,KP_Right,KP_Home,KP_Up,KP_Prior,KP_Insert}
+	bspc {desktop -f,node -d} {1-9,0}.local --follow	
+
+
+# expand a window by moving one of its side outward
+super + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+# 
+# # contract a window by moving one of its side inward
+# super + alt + shift + {h,j,k,l}
+	# bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+
+# show drun
+Menu
+	rofi -show drun
+
+# show opened windows
+alt + Tab
+	bspc node -f last
+
+# change monitor
+super + {_,shift + } {u,i,o} ; {1-9,0}
+	notify-send "changing desktop"; \
+	bspc {desktop -f, node -d} "^{1,2,3}:^{1-9,10}"
+
+# change monitor
+super + {_,shift + }{KP_End,KP_Down,KP_Next,KP_Left,KP_Begin,KP_Right,KP_Home,KP_Up,KP_Prior,KP_Insert}
+	notify-send "changing desktop"; \
+	bspc {desktop -f, node -d} "^{1,2,3}:^{1-9,10}"	
+
+# copy fix
+# super + c
+	# 
+
+@super + BackSpace	
+	yad --entry | xsel -b
+
+@super + shift + BackSpace
+	massa-sibe -c 1 -a 2 -f 1 | xsel -b
+
+super + e
+	thunar
+
+super + XF86MonBrightnessDown
+	urxvt sshpass -f ~/.localssh ssh -t alex@192.168.0.186 "cd $SIBE_DIR ; fish --login"
+super + XF86MonBrightnessUp
+	urxvt sshpass -f ~/.localssh ssh -t alex@192.168.0.186 "cd /data/dtp/git/simulador-performance-test/cli ; fish --login"
+super + XF86AudioRaiseVolume
+	flameshot gui
+super + shift + u
+	rofi_unicode
+X86MonBrightnessUp
+	brightnessctl set +10% 
+X86MonBrightnessDown
+	brightnessctl set 10%- 
+
+super + shift + @period
+	click_info -b ;
+
+super + shift + v
+	superkey

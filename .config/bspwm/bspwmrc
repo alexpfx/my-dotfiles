@@ -1,0 +1,69 @@
+#!/bin/sh
+pgrep -x sxhkd > /dev/null || sxhkd &
+# pgrep -x greenclip > /dev/null || greenclip daemon &
+systemctl --user import-environment DISPLAY
+
+xset r rate 200 200
+#setxkbmap -option caps:swapescape
+#setxkbmap -option caps:super
+
+	mns=($(bspc query -M --names))
+	export monitor1="${mns[0]}"
+	export monitor2="${mns[1]}"
+	export monitor3="${mns[2]}"
+	bspc monitor "$monitor1" -d 1 2 3 4 5 6 7 8 9 0  
+	bspc monitor "$monitor2" -d 1 2 3 4 5 6 7 8 9 0
+	bspc monitor "$monitor3" -d 1 2 3 4 5 6 7 8 9 0  
+
+
+#xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'
+#xprop | grep WM_CLASS
+
+$HOME/.config/polybar/launch.sh &
+
+#https://man.archlinux.org/man/bspwm.1.en#SETTINGS
+
+# bspc config normal_border_color "#293241"
+# bspc config active_border_color "#98c1d9"
+# bspc config focused_border_color "#ee6c4d"
+# bspc config presel_feedback_color "#f07167"
+
+
+bspc config normal_border_color "#222222"
+bspc config focused_border_color "#2193DE"
+
+bspc config split_ratio          0.52
+bspc config pointer_follows_focus false
+
+bspc config border_width        1
+bspc config top_padding        12
+bspc config window_gap          0
+
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+bspc config remove_disabled_monitors true
+bspc config remove_unplugged_monitors true
+xrandr --output eDP-1 --set "TearFree" on
+
+
+
+#bspc rule -a "jetbrains-idea-ce" desktop='^1' 
+# bspc rule -a "Insomnia" desktop='^6'
+# bspc rule -a "DBeaver" desktop='^5'
+#bspc rule -a "jetbrains-goland" desktop='^1'
+#bspc rule -a 'Microsoft Teams - Preview'  desktop=^8
+
+#bspc rule -a 'jetbrains-idea-ce' state=floating follow=on focus=on
+bspc rule -a '*:tk' state=floating follow=on focus=on
+# bspc rule -a '*:onboard' state=floating follow=on focus=on
+wmname LG3D & # fix for some Java apps
+# bspc rule -a android-studio state=floating border=off follow=on
+
+# pgrep -x picom > /dev/null || picom &
+exec xsetroot -cursor_name left_ptr
+
+bspc rule -a Yad state=floating manage=on layer=normal sticky=on follow=on
+bspc rule -a Tk state=floating manage=on layer=normal sticky=on follow=on
+bspc rule -a main.py state=floating manage=on layer=normal sticky=on follow=on
+bspc rule -a main.py state=floating manage=on layer=normal sticky=on follow=on
