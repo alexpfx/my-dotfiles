@@ -67,3 +67,5 @@ bspc rule -a Yad state=floating manage=on layer=normal sticky=on follow=on
 bspc rule -a Tk state=floating manage=on layer=normal sticky=on follow=on
 bspc rule -a main.py state=floating manage=on layer=normal sticky=on follow=on
 bspc rule -a main.py state=floating manage=on layer=normal sticky=on follow=on
+
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
