@@ -33,7 +33,8 @@ super + Tab
 
 # rofi paste menu 
 super + p 
-	clipmenu -i -fn Terminus:size=8 -nb '#002b36' -nf '#839496' -sb '#073642' -sf '#93a1a1'
+	rofi-copyq -matching regex || (setsid copyq >/dev/null 2>&1 & sleep 2.5; rofi-copyq -matching regex)
+#	clipmenu -i -fn Terminus:size=8 -nb '#002b36' -nf '#839496' -sb '#073642' -sf '#93a1a1'
 #	cliphist list | rofi -dmenu | cliphist decode | xclip -selection clipboard
 	
 	
@@ -101,13 +102,13 @@ super + {_,shift + }{KP_End,KP_Down,KP_Next,KP_Left,KP_Begin,KP_Right,KP_Home,KP
 	bspc {desktop -f,node -d} {1-9,0}.local --follow	
 
 
-# expand a window by moving one of its side outward
+# resize and expand a window by moving one of its side outward
 super + alt + {h,j,k,l}
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 # 
-# # contract a window by moving one of its side inward
-# super + alt + shift + {h,j,k,l}
-	# bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+# contract a window by moving one of its side inward
+super + alt + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 
 # show drun
@@ -141,21 +142,17 @@ super + {_,shift + }{KP_End,KP_Down,KP_Next,KP_Left,KP_Begin,KP_Right,KP_Home,KP
 super + e
 	thunar
 
-super + XF86MonBrightnessDown
-	urxvt sshpass -f ~/.localssh ssh -t alex@192.168.0.186 "cd $SIBE_DIR ; fish --login"
-super + XF86MonBrightnessUp
-	urxvt sshpass -f ~/.localssh ssh -t alex@192.168.0.186 "cd /data/dtp/git/simulador-performance-test/cli ; fish --login"
+
 super + XF86AudioRaiseVolume
 	flameshot gui
 super + shift + u
 	rofi_unicode
-X86MonBrightnessUp
-	brightnessctl set +10% 
-X86MonBrightnessDown
-	brightnessctl set 10%- 
+
 
 super + shift + @period
 	click_info -b ;
 
 super + shift + v
 	superkey
+
+
