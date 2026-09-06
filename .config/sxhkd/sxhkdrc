@@ -3,13 +3,13 @@ super + Return
 
 # open terminal (sibe_dir)
 super + shift + Return
-	kitty --working-directory $SIBE_DIR 
+	foot --working-directory $SIBE_DIR 
 
 super + ctrl  + Return
-	kitty --working-directory $SIBE_DOCKER_DIR
+	foot --working-directory $SIBE_DOCKER_DIR
 
 super + alt + Return
-	kitty --working-directory $EXECUTOR_TAREFA_DIR
+	foot --working-directory $EXECUTOR_TAREFA_DIR
 
 # inverter orientação horizontal / vertical
 super + shift + b
